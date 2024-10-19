@@ -12,8 +12,11 @@ public class MainPage {
         this.driver = driver;
     }
 
-    //кнопка Личный кабинет
+    //кнопки
     private static final By cabinetButton = By.xpath(".//header//p[text()='Личный Кабинет']");
+    private static final By enterButton = By.xpath(".//button[text()='Войти в аккаунт']");
+    private static final By createOrderButton = By.xpath(".//button[text()='Оформить заказ']");
+
 
     public void openPage () {
         String url = "https://stellarburgers.nomoreparties.site/";
@@ -23,6 +26,16 @@ public class MainPage {
     @Step("Клик по кнопке Личный кабинет")
     public void clickPersonCabinetButton() {
         driver.findElement(cabinetButton).click();
+    }
+
+    @Step("Клик по кнопке Войти в аккаунт")
+    public void clickEnterButton() {
+        driver.findElement(enterButton).click();
+    }
+
+    @Step("Есть кнопка Оформить заказ")
+    public void isDisplayedOrderButton() {
+        driver.findElement(createOrderButton).isDisplayed();
     }
 
 }
