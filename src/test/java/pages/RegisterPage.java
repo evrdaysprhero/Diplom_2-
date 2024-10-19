@@ -14,11 +14,16 @@ public class RegisterPage {
         this.driver = driver;
     }
 
+    //поля ввода
     private static final By inputName = By.xpath(".//label[text()='Имя']/../input");
     private static final By inputEmail = By.xpath(".//label[text()='Email']/../input");
     private static final By inputPassword = By.xpath(".//label[text()='Пароль']/../input");
 
+    //кнопки
     private static final By registerButton = By.xpath(".//button[text()='Зарегистрироваться']");
+
+    //
+    private static final By passwordError = By.xpath(".//p[text()='Некорректный пароль']");
 
     @Step("Клик по кнопке Зарегистрироваться")
     public void clickRegisterButton() {
@@ -40,5 +45,10 @@ public class RegisterPage {
         setPassword.sendKeys(password);
         setPassword.sendKeys(Keys.TAB);
 
+    }
+
+    @Step
+    public void getShortPassError() {
+        driver.findElement(passwordError).isDisplayed();
     }
 }

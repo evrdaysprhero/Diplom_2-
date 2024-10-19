@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 
 public class RegistrationTest {
 
-    private final String password = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+    private String password = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
     private final String name = "sprhero" + password;
     private final String email = name + "@mailme.ru";
 
@@ -40,12 +40,33 @@ public class RegistrationTest {
 
         Assert.assertTrue(ApiHelper.isUserExists(email,password));
 
+    }
+
+    @Test
+    public void registrationShortPassFail() {
+        password = "12345";
+
+        MainPage mainPage = new MainPage(driver);
+        mainPage.openPage();
+        mainPage.clickPersonCabinetButton();
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.clickRegisterButton();
+
+        RegisterPage registerPage = new RegisterPage(driver);
+        registerPage.fillRegisterForm(name,email,password);
+        registerPage.getShortPassError();
+
+        registerPage.clickRegisterButton();
+        registerPage.getShortPassError();
 
     }
 
     @After
     public void deleteUser() {
-        ApiHelper.deleteUser(email,password);
+        if(ApiHelper.isUserExists(email,password)) {
+            ApiHelper.deleteUser(email, password);
+        }
         driver.quit();
     }
 }
