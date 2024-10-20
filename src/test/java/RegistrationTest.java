@@ -1,3 +1,4 @@
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import org.junit.After;
 import org.junit.Assert;
@@ -25,6 +26,7 @@ public class RegistrationTest {
     }
 
     @Test
+    @DisplayName("Успешная регистрация")
     public void registrationSuccess() {
 
         MainPage mainPage = new MainPage(driver);
@@ -43,6 +45,7 @@ public class RegistrationTest {
     }
 
     @Test
+    @DisplayName("Ошибка для некорректного пароля. Минимальный пароль — шесть символов")
     public void registrationShortPassFail() {
         password = "12345";
 

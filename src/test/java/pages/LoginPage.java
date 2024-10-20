@@ -17,10 +17,16 @@ public class LoginPage {
     //кнопки
     private static final By registerButton = By.xpath(".//a[@href='/register']");
     private static final By enterButton = By.xpath(".//button[text()='Войти']");
+    private static final By forgetPasswordButton = By.xpath(".//p[text()='Забыли пароль?']/a");
 
     //поля ввода
     private static final By inputEmail = By.xpath(".//label[text()='Email']/../input");
     private static final By inputPassword = By.xpath(".//label[text()='Пароль']/../input");
+
+    public void openPage () {
+        String url = "https://stellarburgers.nomoreparties.site/login/";
+        driver.get(url);
+    }
 
     @Step("Клик по кнопке Зарегистрироваться")
     public void clickRegisterButton() {
@@ -43,6 +49,12 @@ public class LoginPage {
     @Step("Клик по кнопке Войти")
     public void clickEnterButton() {
         driver.findElement(enterButton).click();
+
+    }
+
+    @Step("Клик по кнопке Восстановить пароль")
+    public void clickRestorePasswordrButton() {
+        driver.findElement(forgetPasswordButton).click();
 
     }
 

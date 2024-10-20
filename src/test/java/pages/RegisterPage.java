@@ -21,13 +21,24 @@ public class RegisterPage {
 
     //кнопки
     private static final By registerButton = By.xpath(".//button[text()='Зарегистрироваться']");
+    private static final By enterButton = By.xpath(".//p[text()='Уже зарегистрированы?']/a");
 
     //
     private static final By passwordError = By.xpath(".//p[text()='Некорректный пароль']");
 
+    public void openPage () {
+        String url = "https://stellarburgers.nomoreparties.site/register/";
+        driver.get(url);
+    }
+
     @Step("Клик по кнопке Зарегистрироваться")
     public void clickRegisterButton() {
         driver.findElement(registerButton).click();
+    }
+
+    @Step("Клик по кнопке Войти")
+    public void clickEnterButton() {
+        driver.findElement(enterButton).click();
     }
 
     @Step("Заполнить форму регистрации")
