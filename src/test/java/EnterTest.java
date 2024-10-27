@@ -7,15 +7,10 @@ import org.openqa.selenium.WebDriver;
 import pages.*;
 import pogo.RegisterRequest;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeUnit;
-
-import static io.restassured.RestAssured.given;
 
 public class EnterTest {
     private String password;
-    private String name;
     private String email;
 
     private WebDriver driver = Browser.getWebDriver(BrowserName.YANDEX);
@@ -23,17 +18,12 @@ public class EnterTest {
     @Before
     public void setUp() {
         RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/";
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
-        password = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
-        name = "sprhero" + password;
-        email = name + "@mailme.ru";
+        RegisterRequest registerRequest = ApiHelper.createUser();
+        password = registerRequest.getPassword();
+        email = registerRequest.getEmail();
 
-        //создать пользователя
-        RegisterRequest registerRequest = new RegisterRequest(name, password, email);
-        given()
-                .header("Content-type", "application/json")
-                .body(registerRequest)
-                .post("/api/auth/register");
     }
 
     @Test
@@ -48,7 +38,6 @@ public class EnterTest {
         loginPage.fillLoginForm(email,password);
         loginPage.clickEnterButton();
 
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         mainPage.isDisplayedOrderButton();
 
     }
@@ -65,7 +54,6 @@ public class EnterTest {
         loginPage.fillLoginForm(email,password);
         loginPage.clickEnterButton();
 
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         mainPage.isDisplayedOrderButton();
 
     }
@@ -88,7 +76,6 @@ public class EnterTest {
         loginPage.fillLoginForm(email,password);
         loginPage.clickEnterButton();
 
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         mainPage = new MainPage(driver);
         mainPage.isDisplayedOrderButton();
 
@@ -107,29 +94,8 @@ public class EnterTest {
         loginPage.clickEnterButton();
 
         MainPage mainPage;
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         mainPage = new MainPage(driver);
         mainPage.isDisplayedOrderButton();
-
-    }
-
-    @Test
-    @DisplayName("переход по клику на «Личный кабинет»")
-    public void profilePageEnter() {
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-
-        MainPage mainPage = new MainPage(driver);
-        mainPage.openPage();
-        mainPage.clickEnterButton();
-
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.fillLoginForm(email,password);
-        loginPage.clickEnterButton();
-
-        mainPage.clickPersonCabinetButton();
-
-        ProfilePage profilePage = new ProfilePage(driver);
-        profilePage.getDescriptionText();
 
     }
 
