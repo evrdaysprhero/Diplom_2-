@@ -20,6 +20,18 @@ public class MainPage {
     //Конструктор: заголовок
     private static final By constuctorHeader = By.xpath(".//h1[text()='Соберите бургер']");
 
+    //Конструктор: меню
+    private static final By breadButton = By.xpath(".//span[text()='Булки']");
+    private static final By breadButtonActive = By.xpath(".//div[contains(@class,'tab_tab_type_current__2BEPc')]/span[text()='Булки']");
+    private static final By soucesButton = By.xpath(".//span[text()='Соусы']");
+    private static final By soucesButtonActive = By.xpath(".//div[contains(@class,'tab_tab_type_current__2BEPc')]/span[text()='Соусы']");
+    private static final By fillersButton = By.xpath(".//span[text()='Начинки']");
+    private static final By fillersButtonActive = By.xpath(".//div[contains(@class,'tab_tab_type_current__2BEPc')]/span[text()='Начинки']");
+    private static final By breadHeader = By.xpath(".//h2[text()='Булки']");
+
+    private static final By soucesHeader = By.xpath(".//h2[text()='Соус']");
+    private static final By fillersHeader = By.xpath(".//h2[text()='Начинки']");
+
 
     public void openPage () {
         String url = "https://stellarburgers.nomoreparties.site/";
@@ -36,6 +48,21 @@ public class MainPage {
         driver.findElement(enterButton).click();
     }
 
+    @Step("Клик по кнопке Булки")
+    public void clickBreadButton() {
+        driver.findElement(breadButton).click();
+    }
+
+    @Step("Клик по кнопке Соус")
+    public void clickSoucesButton() {
+        driver.findElement(soucesButton).click();
+    }
+
+    @Step("Клик по кнопке Начинки")
+    public void clickFillersButton() {
+        driver.findElement(fillersButton).click();
+    }
+
     @Step("Есть кнопка Оформить заказ")
     public void isDisplayedOrderButton() {
         driver.findElement(createOrderButton).isDisplayed();
@@ -44,6 +71,21 @@ public class MainPage {
     @Step("Есть заголовок Соберите бургер")
     public void isDisplayedConstructorHeader() {
         driver.findElement(constuctorHeader).isDisplayed();
+    }
+
+    @Step("Активна вкладка Соус")
+    public void isSoucesActive() {
+        driver.findElement(soucesButtonActive).isDisplayed();
+    }
+
+    @Step("Активна вкладка Булки")
+    public void isBreadActive() {
+        driver.findElement(breadButtonActive).isDisplayed();
+    }
+
+    @Step("Активна вкладка Начинки")
+    public void isFillersActive() {
+        driver.findElement(fillersButtonActive).isDisplayed();
     }
 
 }

@@ -1,11 +1,10 @@
-import io.qameta.allure.Step;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import pages.LoginPage;
 import pages.MainPage;
-import pages.ProfilePage;
 
 public class ConstructorTest {
 
@@ -16,23 +15,39 @@ public class ConstructorTest {
         RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/";
     }
 
-    @Step("Войти в личный кабинет")
-    public ProfilePage enterProfile(String email, String password) {
+    @Test
+    @DisplayName("переход к начинкам")
+    public void goToFillers() {
 
         MainPage mainPage = new MainPage(driver);
         mainPage.openPage();
-        mainPage.clickEnterButton();
+        mainPage.clickFillersButton();
+        mainPage.isFillersActive();
 
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.fillLoginForm(email,password);
-        loginPage.clickEnterButton();
-
-        mainPage.clickPersonCabinetButton();
-
-        return new ProfilePage(driver);
     }
 
+    @Test
+    @DisplayName("переход к булкам")
+    public void goToBread() {
 
+        MainPage mainPage = new MainPage(driver);
+        mainPage.openPage();
+        mainPage.clickFillersButton();
+        mainPage.clickBreadButton();
+        mainPage.isBreadActive();
+
+    }
+
+    @Test
+    @DisplayName("переход к соусам")
+    public void goToSouces() {
+
+        MainPage mainPage = new MainPage(driver);
+        mainPage.openPage();
+        mainPage.clickSoucesButton();
+        mainPage.isSoucesActive();
+
+    }
 
     @After
     public void deleteUser() {
