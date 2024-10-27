@@ -113,6 +113,26 @@ public class EnterTest {
 
     }
 
+    @Test
+    @DisplayName("переход по клику на «Личный кабинет»")
+    public void profilePageEnter() {
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+
+        MainPage mainPage = new MainPage(driver);
+        mainPage.openPage();
+        mainPage.clickEnterButton();
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.fillLoginForm(email,password);
+        loginPage.clickEnterButton();
+
+        mainPage.clickPersonCabinetButton();
+
+        ProfilePage profilePage = new ProfilePage(driver);
+        profilePage.getDescriptionText();
+
+    }
+
     @After
     public void deleteUser() {
         if(ApiHelper.isUserExists(email,password)) {

@@ -8,7 +8,7 @@ public class Browser {
             case CHROME :
                 return new ChromeDriver();
             case YANDEX :
-                System.setProperty("webdriver.chrome.driver", "C:\\WebDrivers\\yandexdriver-24.7.0.2299-win64\\yandexdriver.exe");
+                System.setProperty("webdriver.chrome.driver", "C:\\WebDrivers\\yandexdriver-24.10.1.598-win64\\yandexdriver.exe");
                 return new ChromeDriver();
             default:
                 throw new IllegalArgumentException("Unsupported browser: " + browser);

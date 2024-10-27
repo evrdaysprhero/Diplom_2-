@@ -17,6 +17,9 @@ public class MainPage {
     private static final By enterButton = By.xpath(".//button[text()='Войти в аккаунт']");
     private static final By createOrderButton = By.xpath(".//button[text()='Оформить заказ']");
 
+    //Конструктор: заголовок
+    private static final By constuctorHeader = By.xpath(".//h1[text()='Соберите бургер']");
+
 
     public void openPage () {
         String url = "https://stellarburgers.nomoreparties.site/";
@@ -36,6 +39,11 @@ public class MainPage {
     @Step("Есть кнопка Оформить заказ")
     public void isDisplayedOrderButton() {
         driver.findElement(createOrderButton).isDisplayed();
+    }
+
+    @Step("Есть заголовок Соберите бургер")
+    public void isDisplayedConstructorHeader() {
+        driver.findElement(constuctorHeader).isDisplayed();
     }
 
 }
