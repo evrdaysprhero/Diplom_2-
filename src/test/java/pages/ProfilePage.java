@@ -12,22 +12,38 @@ public class ProfilePage {
         this.driver = driver;
     }
 
-    private static final By profileDescription = By.xpath(".//p[text()='В этом разделе вы можете изменить свои персональные данные']");
-    private static final By constructorButton = By.xpath(".//p[text()='Конструктор']");
-    private static final By logoButton = By.xpath(".//header//div/a");
+    private static final By PRIFILE_DESCRIPTION = By.xpath(".//p[text()='В этом разделе вы можете изменить свои персональные данные']");
+    private static final By CONSTRUCTOR_BUTTON = By.xpath(".//p[text()='Конструктор']");
+    private static final By LOGO_BUTTON = By.xpath(".//header//div/a");
 
     @Step("Найти текст с описанием профиля")
     public void getDescriptionText() {
-        driver.findElement(profileDescription).isDisplayed();
+        driver.findElement(PRIFILE_DESCRIPTION).isDisplayed();
     }
 
     @Step("Клик по кнопке Конструктор")
     public void clickConstructorButton() {
-        driver.findElement(constructorButton).click();
+        driver.findElement(CONSTRUCTOR_BUTTON).click();
     }
 
     @Step("Клик по логотипу")
     public void clickLogoButton() {
-        driver.findElement(logoButton).click();
+        driver.findElement(LOGO_BUTTON).click();
+    }
+
+    @Step("Войти в личный кабинет")
+    public static ProfilePage enterProfile(String email, String password, WebDriver driver) {
+
+        MainPage mainPage = new MainPage(driver);
+        mainPage.openPage();
+        mainPage.clickEnterButton();
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.fillLoginForm(email,password);
+        loginPage.clickEnterButton();
+
+        mainPage.clickPersonCabinetButton();
+
+        return new ProfilePage(driver);
     }
 }

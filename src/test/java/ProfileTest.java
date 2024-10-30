@@ -12,16 +12,16 @@ import pogo.RegisterRequest;
 
 import java.util.concurrent.TimeUnit;
 
-public class ProfileTest {
+public class ProfileTest extends AbstractWebTest {
 
     private String password;
     private String email;
 
-    private WebDriver driver = Browser.getWebDriver(BrowserName.YANDEX);
+    private WebDriver driver = Browser.getWebDriver();
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/";
+        RestAssured.baseURI = URL_MAIN;
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
         RegisterRequest registerRequest = ApiHelper.createUser();
@@ -30,27 +30,11 @@ public class ProfileTest {
 
     }
 
-    @Step("Войти в личный кабинет")
-    public ProfilePage enterProfile(String email, String password) {
-
-        MainPage mainPage = new MainPage(driver);
-        mainPage.openPage();
-        mainPage.clickEnterButton();
-
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.fillLoginForm(email,password);
-        loginPage.clickEnterButton();
-
-        mainPage.clickPersonCabinetButton();
-
-        return new ProfilePage(driver);
-    }
-
     @Test
     @DisplayName("переход по клику на «Личный кабинет»")
     public void profilePageEnter() {
 
-        ProfilePage profilePage = enterProfile(email, password);
+        ProfilePage profilePage = ProfilePage.enterProfile(email, password, driver);
         profilePage.getDescriptionText();
 
     }
@@ -59,7 +43,7 @@ public class ProfileTest {
     @DisplayName("Переход из личного кабинета в конструктор по клику на «Конструктор»")
     public void goFromProfileToMainWithConstructorButton() {
 
-        ProfilePage profilePage = enterProfile(email, password);
+        ProfilePage profilePage = ProfilePage.enterProfile(email, password, driver);
         profilePage.clickConstructorButton();
 
         MainPage mainPage = new MainPage(driver);
@@ -71,7 +55,7 @@ public class ProfileTest {
     @DisplayName("Переход из личного кабинета в конструктор по клику на логотип")
     public void goFromProfileToMainWithLogo() {
 
-        ProfilePage profilePage = enterProfile(email, password);
+        ProfilePage profilePage = ProfilePage.enterProfile(email, password, driver);
         profilePage.clickLogoButton();
 
         MainPage mainPage = new MainPage(driver);
@@ -81,9 +65,7 @@ public class ProfileTest {
 
     @After
     public void deleteUser() {
-        if(ApiHelper.isUserExists(email,password)) {
-            ApiHelper.deleteUser(email, password);
-        }
+        ApiHelper.deleteUserWithCheck(email, password);
         driver.quit();
     }
 }

@@ -6,7 +6,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class LoginPage {
+public class LoginPage extends AbstractPage {
 
     private WebDriver driver;
 
@@ -15,32 +15,32 @@ public class LoginPage {
     }
 
     //кнопки
-    private static final By registerButton = By.xpath(".//a[@href='/register']");
-    private static final By enterButton = By.xpath(".//button[text()='Войти']");
-    private static final By forgetPasswordButton = By.xpath(".//p[text()='Забыли пароль?']/a");
+    private static final By REGISTER_BUTTON = By.xpath(".//a[@href='/register']");
+    private static final By ENTER_BUTTON = By.xpath(".//button[text()='Войти']");
+    private static final By FORGOT_PASS_BUTTON = By.xpath(".//p[text()='Забыли пароль?']/a");
 
     //поля ввода
-    private static final By inputEmail = By.xpath(".//label[text()='Email']/../input");
-    private static final By inputPassword = By.xpath(".//label[text()='Пароль']/../input");
+    private static final By INPUT_EMAIL = By.xpath(".//label[text()='Email']/../input");
+    private static final By INPUT_PASSWORD = By.xpath(".//label[text()='Пароль']/../input");
 
     public void openPage () {
-        String url = "https://stellarburgers.nomoreparties.site/login/";
+        String url = URL_LOGIN;
         driver.get(url);
     }
 
     @Step("Клик по кнопке Зарегистрироваться")
     public void clickRegisterButton() {
-        driver.findElement(registerButton).click();
+        driver.findElement(REGISTER_BUTTON).click();
     }
 
     @Step("Заполнить форму входа")
     public void fillLoginForm(String email, String password) {
 
-        WebElement setEmail = driver.findElement(inputEmail);
+        WebElement setEmail = driver.findElement(INPUT_EMAIL);
         setEmail.sendKeys(email);
         setEmail.sendKeys(Keys.TAB);
 
-        WebElement setPassword = driver.findElement(inputPassword);
+        WebElement setPassword = driver.findElement(INPUT_PASSWORD);
         setPassword.sendKeys(password);
         setPassword.sendKeys(Keys.TAB);
 
@@ -48,13 +48,13 @@ public class LoginPage {
 
     @Step("Клик по кнопке Войти")
     public void clickEnterButton() {
-        driver.findElement(enterButton).click();
+        driver.findElement(ENTER_BUTTON).click();
 
     }
 
     @Step("Клик по кнопке Восстановить пароль")
     public void clickRestorePasswordrButton() {
-        driver.findElement(forgetPasswordButton).click();
+        driver.findElement(FORGOT_PASS_BUTTON).click();
 
     }
 

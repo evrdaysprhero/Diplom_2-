@@ -10,13 +10,17 @@ import static io.restassured.RestAssured.given;
 
 public class ApiHelper {
 
+    public static String API_OAUTH_USER = "/api/auth/user";
+    public static String API_OAUTH_REGISTER = "/api/auth/register";
+    public static String API_OAUTH_LOGIN = "/api/auth/login";
+
     public static RegisterResponse loginUser(String email, String password) {
         LoginRequest loginRequest = new LoginRequest(password, email);
 
         return given()
                 .header("Content-type", "application/json")
                 .body(loginRequest)
-                .post("/api/auth/login")
+                .post(API_OAUTH_LOGIN)
                 .body()
                 .as(RegisterResponse.class);
 
@@ -36,7 +40,15 @@ public class ApiHelper {
 
         given()
                 .header("authorization", accessToken)
-                .delete("/api/auth/user");
+                .delete(API_OAUTH_USER);
+
+    }
+
+    @Step("Удалить пользователя с проверкой его существования")
+    public static void deleteUserWithCheck(String email, String password) {
+        if(isUserExists(email,password)) {
+            deleteUser(email, password);
+        }
 
     }
 
@@ -50,7 +62,7 @@ public class ApiHelper {
         given()
                 .header("Content-type", "application/json")
                 .body(registerRequest)
-                .post("/api/auth/register");
+                .post(API_OAUTH_REGISTER);
 
         return registerRequest;
 

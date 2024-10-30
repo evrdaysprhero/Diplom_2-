@@ -15,15 +15,15 @@ public class ForgotPasswordPage {
     }
 
     //поля ввода
-    private static final By inputEmail = By.xpath(".//label[text()='Email']/../input");
+    private static final By INPUT_EMAIL = By.xpath(".//label[text()='Email']/../input");
 
     //кнопки
-    private static final By restoreButton = By.xpath(".//button[text()='Восстановить']");
+    private static final By RESTORE_BUTTON = By.xpath(".//button[text()='Восстановить']");
 
     @Step("Заполнить email")
     public void fillEmailForm(String email) {
 
-        WebElement setEmail = driver.findElement(inputEmail);
+        WebElement setEmail = driver.findElement(INPUT_EMAIL);
         setEmail.sendKeys(email);
         setEmail.sendKeys(Keys.TAB);
 
@@ -31,7 +31,7 @@ public class ForgotPasswordPage {
 
     @Step("Клик по кнопке Восстановить")
     public void clickRestoreButton() {
-        driver.findElement(restoreButton).click();
+        driver.findElement(RESTORE_BUTTON).click();
     }
 
 }

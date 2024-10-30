@@ -9,15 +9,15 @@ import pogo.RegisterRequest;
 
 import java.util.concurrent.TimeUnit;
 
-public class EnterTest {
+public class EnterTest extends AbstractWebTest {
     private String password;
     private String email;
 
-    private WebDriver driver = Browser.getWebDriver(BrowserName.YANDEX);
+    private WebDriver driver = Browser.getWebDriver();
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/";
+        RestAssured.baseURI = URL_MAIN;
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
         RegisterRequest registerRequest = ApiHelper.createUser();
@@ -101,9 +101,7 @@ public class EnterTest {
 
     @After
     public void deleteUser() {
-        if(ApiHelper.isUserExists(email,password)) {
-            ApiHelper.deleteUser(email, password);
-        }
+        ApiHelper.deleteUserWithCheck(email, password);
         driver.quit();
     }
 }

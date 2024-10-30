@@ -12,17 +12,17 @@ import pages.RegisterPage;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class RegistrationTest {
+public class RegistrationTest extends AbstractWebTest {
 
     private String password = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
     private final String name = "sprhero" + password;
     private final String email = name + "@mailme.ru";
 
-    private WebDriver driver = Browser.getWebDriver(BrowserName.YANDEX);
+    private WebDriver driver = Browser.getWebDriver();
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/";
+        RestAssured.baseURI = URL_MAIN;
     }
 
     @Test
@@ -67,9 +67,7 @@ public class RegistrationTest {
 
     @After
     public void deleteUser() {
-        if(ApiHelper.isUserExists(email,password)) {
-            ApiHelper.deleteUser(email, password);
-        }
+        ApiHelper.deleteUserWithCheck(email, password);
         driver.quit();
     }
 }

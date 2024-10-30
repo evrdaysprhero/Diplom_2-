@@ -6,13 +6,13 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import pages.MainPage;
 
-public class ConstructorTest {
+public class ConstructorTest extends AbstractWebTest {
 
-    private WebDriver driver = Browser.getWebDriver(BrowserName.YANDEX);
+    private WebDriver driver = Browser.getWebDriver();
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/";
+        RestAssured.baseURI = URL_MAIN;
     }
 
     @Test
