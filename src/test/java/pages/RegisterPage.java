@@ -1,6 +1,7 @@
 package pages;
 
 import io.qameta.allure.Step;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -60,6 +61,6 @@ public class RegisterPage extends AbstractPage {
 
     @Step("Отображается ошибка Некорректный пароль")
     public void getShortPassError() {
-        driver.findElement(PASSWORD_ERROR).isDisplayed();
+        Assert.assertTrue(driver.findElement(PASSWORD_ERROR).isDisplayed());
     }
 }

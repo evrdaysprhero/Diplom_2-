@@ -1,6 +1,7 @@
 package pages;
 
 import io.qameta.allure.Step;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -18,7 +19,7 @@ public class ProfilePage {
 
     @Step("Найти текст с описанием профиля")
     public void getDescriptionText() {
-        driver.findElement(PRIFILE_DESCRIPTION).isDisplayed();
+        Assert.assertTrue(driver.findElement(PRIFILE_DESCRIPTION).isDisplayed());
     }
 
     @Step("Клик по кнопке Конструктор")

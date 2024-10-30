@@ -1,6 +1,7 @@
 package pages;
 
 import io.qameta.allure.Step;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -65,27 +66,27 @@ public class MainPage extends AbstractPage {
 
     @Step("Есть кнопка Оформить заказ")
     public void isDisplayedOrderButton() {
-        driver.findElement(CREATE_ORDER_BUTTON).isDisplayed();
+        Assert.assertTrue(driver.findElement(CREATE_ORDER_BUTTON).isDisplayed());
     }
 
     @Step("Есть заголовок Соберите бургер")
     public void isDisplayedConstructorHeader() {
-        driver.findElement(CONSTRUCTOR_HEADER).isDisplayed();
+        Assert.assertTrue(driver.findElement(CONSTRUCTOR_HEADER).isDisplayed());
     }
 
     @Step("Активна вкладка Соус")
     public void isSoucesActive() {
-        driver.findElement(SOUSES_BUTTON_ACTIVE).isDisplayed();
+        Assert.assertTrue(driver.findElement(SOUSES_BUTTON_ACTIVE).isDisplayed());
     }
 
     @Step("Активна вкладка Булки")
     public void isBreadActive() {
-        driver.findElement(BREAD_BUTTON_ACTIVE).isDisplayed();
+        Assert.assertTrue(driver.findElement(BREAD_BUTTON_ACTIVE).isDisplayed());
     }
 
     @Step("Активна вкладка Начинки")
     public void isFillersActive() {
-        driver.findElement(FILLERS_BUTTON_ACTIVE).isDisplayed();
+        Assert.assertTrue(driver.findElement(FILLERS_BUTTON_ACTIVE).isDisplayed());
     }
 
 }
