@@ -24,8 +24,8 @@ public class MainPage extends AbstractPage {
     //Конструктор: меню
     private static final By BREAD_BUTTON = By.xpath(".//span[text()='Булки']");
     private static final By BREAD_BUTTON_ACTIVE = By.xpath(".//div[contains(@class,'tab_tab_type_current__2BEPc')]/span[text()='Булки']");
-    private static final By SOUSES_BUTTON = By.xpath(".//span[text()='Соусы']");
-    private static final By SOUSES_BUTTON_ACTIVE = By.xpath(".//div[contains(@class,'tab_tab_type_current__2BEPc')]/span[text()='Соусы']");
+    private static final By SOUСES_BUTTON = By.xpath(".//span[text()='Соусы']");
+    private static final By SOUСES_BUTTON_ACTIVE = By.xpath(".//div[contains(@class,'tab_tab_type_current__2BEPc')]/span[text()='Соусы']");
     private static final By FILLERS_BUTTON = By.xpath(".//span[text()='Начинки']");
     private static final By FILLERS_BUTTON_ACTIVE = By.xpath(".//div[contains(@class,'tab_tab_type_current__2BEPc')]/span[text()='Начинки']");
     private static final By BREAD_HEADER = By.xpath(".//h2[text()='Булки']");
@@ -56,7 +56,7 @@ public class MainPage extends AbstractPage {
 
     @Step("Клик по кнопке Соус")
     public void clickSoucesButton() {
-        driver.findElement(SOUSES_BUTTON).click();
+        driver.findElement(SOUСES_BUTTON).click();
     }
 
     @Step("Клик по кнопке Начинки")
@@ -76,7 +76,7 @@ public class MainPage extends AbstractPage {
 
     @Step("Активна вкладка Соус")
     public void isSoucesActive() {
-        Assert.assertTrue(driver.findElement(SOUSES_BUTTON_ACTIVE).isDisplayed());
+        Assert.assertTrue(driver.findElement(SOUСES_BUTTON_ACTIVE).isDisplayed());
     }
 
     @Step("Активна вкладка Булки")

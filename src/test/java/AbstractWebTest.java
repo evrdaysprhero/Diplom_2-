@@ -1,3 +1,3 @@
 public class AbstractWebTest {
-    public String URL_MAIN = "https://stellarburgers.nomoreparties.site/";
+    public static final String URL_MAIN = "https://stellarburgers.nomoreparties.site/";
 }

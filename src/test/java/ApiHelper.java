@@ -10,9 +10,9 @@ import static io.restassured.RestAssured.given;
 
 public class ApiHelper {
 
-    public static String API_OAUTH_USER = "/api/auth/user";
-    public static String API_OAUTH_REGISTER = "/api/auth/register";
-    public static String API_OAUTH_LOGIN = "/api/auth/login";
+    public static final String API_OAUTH_USER = "/api/auth/user";
+    public static final String API_OAUTH_REGISTER = "/api/auth/register";
+    public static final String API_OAUTH_LOGIN = "/api/auth/login";
 
     public static RegisterResponse loginUser(String email, String password) {
         LoginRequest loginRequest = new LoginRequest(password, email);
